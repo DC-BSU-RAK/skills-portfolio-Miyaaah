@@ -1,3 +1,11 @@
+# Mia Lovina D. Tabucan CCY2 G2
+
+# Sources
+# Background Images Sources:
+# https://www.freepik.com/free-photo/colourful-math-numbers-letters-frame-with-copy-space-top-view_6625068.htm#fromView=keyword&page=1&position=0&uuid=ace1995e-cffd-4f62-91f5-e4fef277358a&query=Addition+subtraction+background
+# Edited by me: edited and adjusted colors for Tkinter background design
+
+
 from tkinter import *
 from tkinter import messagebox
 import random
@@ -247,4 +255,5 @@ replay_button.place(relx=0.5, y=363, anchor='n')
 
 # Show start frame first
 switch_to_frame(start_frame)
+
 root.mainloop()
