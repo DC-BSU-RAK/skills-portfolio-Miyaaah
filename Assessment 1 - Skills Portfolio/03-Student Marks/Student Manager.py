@@ -52,7 +52,7 @@ def load_students():
 
 def save_students():
     try:
-        with open("studentMarks.txt", "w") as f:  # auto-close
+        with open("studentMarks.txt", "w") as f:  
             f.write(str(len(students)) + "\n")
             for s in students:
                 line = f"{s['id']},{s['name']},{s['c1']},{s['c2']},{s['c3']},{s['exam']}\n"
@@ -110,7 +110,7 @@ def display_all_students():
 
     print_header()
     
-    total_percent_sum = 0  # sum of all students' overall %
+    total_percent_sum = 0  
     
     for s in students: 
         coursework_total = s["c1"] + s["c2"] + s["c3"]
@@ -408,7 +408,6 @@ def update_student_load(event=None):
 
             return
 
-    # If not found:
     messagebox.showerror("Error", f"No student with ID {student_id}")
 
 
@@ -470,5 +469,6 @@ update_record.place(x=30, y=490, width=150, height=40)
 
 # Show all students first
 display_all_students()
+
 
 root.mainloop()
