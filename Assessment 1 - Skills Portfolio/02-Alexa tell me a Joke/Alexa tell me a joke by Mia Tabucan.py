@@ -44,20 +44,26 @@ with open("randomJokes.txt", "r", encoding="utf-8") as jokes: # encoding="utf-8"
 current_joke = ("", "")  
 
 
-# Pick a random joke
 def next_random_joke():
     global current_joke
-    joke_line = random.choice(jokes_list)
 
-    # Split the joke at the first question mark to separate the setup and punchline
-    if "?" in joke_line:
-        setup, punch = joke_line.split("?", 1)
-    else:
-        setup, punch = joke_line, ""
-    current_joke = (setup + "?", punch)
-    
-    # Update the labels (Show only the setup (question) and hide the punchline)
-    joke.config(text=current_joke[0])
+    joke_line = random.choice(jokes_list).strip()
+
+    setup = joke_line
+    punch = ""
+
+    # Try to find the first punctuation to split setup and punchline
+    for punctuation in ["?", ".", "!"]:
+        if punctuation in joke_line:
+            index = joke_line.find(punctuation)
+            setup = joke_line[:index+1].strip() 
+            punch = joke_line[index+1:].strip()  
+            break  
+
+    current_joke = (setup, punch)
+
+    # Update the labels
+    joke.config(text=setup)
     punchline.config(text="")
 
 # Reveal punchline
@@ -66,7 +72,7 @@ def reveal():
 
 def start_game():
     switch_to_frame(joke_frame)
-    next_random_joke()  # Show first random joke on entry
+    next_random_joke()  
 
 def switch_to_frame(frame):
     frame.tkraise()
