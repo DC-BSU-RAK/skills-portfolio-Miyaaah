@@ -52,7 +52,7 @@ def load_students():
 
 def save_students():
     try:
-        with open("studentMarks.txt", "w") as f:  
+        with open("studentMarks.txt", "w") as f:  # auto-close
             f.write(str(len(students)) + "\n")
             for s in students:
                 line = f"{s['id']},{s['name']},{s['c1']},{s['c2']},{s['c3']},{s['exam']}\n"
@@ -110,7 +110,7 @@ def display_all_students():
 
     print_header()
     
-    total_percent_sum = 0  
+    total_percent_sum = 0  # sum of all students' overall %
     
     for s in students: 
         coursework_total = s["c1"] + s["c2"] + s["c3"]
@@ -384,36 +384,37 @@ def update_student_load(event=None):
 
     for s in students:
         if s["id"] == student_id:
+
             add_panel.place(x=200, y=105, width=660, height=460)
 
+            add_id.config(state="disabled")  # <-- lock ID here
             add_id.delete(0, END)
             add_id.insert(0, s["id"])
 
             add_name.delete(0, END)
             add_name.insert(0, s["name"])
-
             add_c1.delete(0, END)
             add_c1.insert(0, s["c1"])
-
             add_c2.delete(0, END)
             add_c2.insert(0, s["c2"])
-
             add_c3.delete(0, END)
             add_c3.insert(0, s["c3"])
-
             add_exam.delete(0, END)
             add_exam.insert(0, s["exam"])
 
-            save_button.config(text="Update Student", command=lambda: update_student_save(s))
+            save_button.config(
+                text="Update Student",
+                command=lambda: update_student_save(s)
+            )
 
             return
 
     messagebox.showerror("Error", f"No student with ID {student_id}")
 
 
+
 def update_student_save(student):
     try:
-        student["id"] = add_id.get().strip()
         student["name"] = add_name.get().strip()
         student["c1"] = int(add_c1.get() or 0)
         student["c2"] = int(add_c2.get() or 0)
@@ -424,6 +425,8 @@ def update_student_save(student):
 
         messagebox.showinfo("Success", "Student updated successfully!")
 
+        # Return to add mode
+        add_id.config(state="normal")
         save_button.config(text="Save Student", command=save_student)
 
         hide_add_panel()
@@ -431,6 +434,7 @@ def update_student_save(student):
 
     except ValueError:
         messagebox.showerror("Error", "Coursework and Exam must be numbers.")
+
 
 
 # Buttons 
@@ -471,7 +475,4 @@ update_record.place(x=30, y=490, width=150, height=40)
 # Show all students first
 display_all_students()
 
-
 root.mainloop()
-
-
