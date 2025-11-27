@@ -413,7 +413,7 @@ def update_student_load(event=None):
 
 def update_student_save(student):
     try:
-        student["name"] = add_name.get().strip()
+        student["name"] = add_id.get().strip()
         student["c1"] = int(add_c1.get() or 0)
         student["c2"] = int(add_c2.get() or 0)
         student["c3"] = int(add_c3.get() or 0)
@@ -472,3 +472,4 @@ display_all_students()
 
 
 root.mainloop()
+
