@@ -1,5 +1,5 @@
 # Mia Lovina D. Tabucan CCY2 G2
-# Sources: geeksforgeeks
+# Sources: geeksforgeeks, AI assistance was used to identify and correct errors in my code
 # Background Images Sources:
 # https://www.freepik.com/premium-vector/school-logo-design-template-customizable-education-logo-ideas_358577293.htm
 # Edited by me: edited and adjusted colors for Tkinter background design
@@ -52,7 +52,7 @@ def load_students():
 
 def save_students():
     try:
-        with open("studentMarks.txt", "w") as f:  # auto-close
+        with open("studentMarks.txt", "w") as f:  
             f.write(str(len(students)) + "\n")
             for s in students:
                 line = f"{s['id']},{s['name']},{s['c1']},{s['c2']},{s['c3']},{s['exam']}\n"
@@ -476,3 +476,4 @@ update_record.place(x=30, y=490, width=150, height=40)
 display_all_students()
 
 root.mainloop()
+
